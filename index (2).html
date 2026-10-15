@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Kalyan Jadhav is a Microsoft Dynamics 365 Business Central / NAV Technical Consultant specialising in AL development, reporting, data migration, integrations, and ERP technical support." />
+  <meta property="og:title" content="Kalyan Jadhav | Business Central Technical Consultant" />
+  <meta property="og:description" content="Practical ERP engineering across Microsoft Dynamics 365 Business Central and NAV — AL development, reports, migration, and integrations." />
+  <meta property="og:type" content="website" />
+  <title>Kalyan Jadhav | Business Central Technical Consultant</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #101827;
+      --ink-soft: #344054;
+      --muted: #64748b;
+      --line: #e3e8f0;
+      --paper: #f6f8fc;
+      --white: #ffffff;
+      --navy: #0b1220;
+      --navy-2: #121e31;
+      --blue: #2563eb;
+      --cyan: #38bdf8;
+      --blue-soft: #eaf3ff;
+      --mint: #8ee6cf;
+      --shadow: 0 18px 55px rgba(16, 24, 39, .08);
+      --radius: 22px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .section { padding: 96px 0; }
+    .section-heading { max-width: 740px; margin-bottom: 38px; }
+    .eyebrow { color: var(--blue); font-size: .76rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .section-title { margin-top: 10px; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.12; letter-spacing: -.045em; }
+    .section-intro { margin-top: 16px; color: var(--muted); font-size: 1.04rem; max-width: 700px; }
+
+    /* Navigation */
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(11, 18, 32, .92); border-bottom: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(16px); }
+    .nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; color: #fff; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 13px; color: #07111f; background: linear-gradient(135deg, var(--cyan), var(--mint)); font-size: .9rem; letter-spacing: -.04em; }
+    .brand-name { font-size: 1.02rem; }
+    .brand-name small { display: block; color: #97a7bd; font-size: .68rem; font-weight: 500; letter-spacing: .02em; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; color: #cfdae9; font-size: .88rem; font-weight: 600; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta { border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 9px 16px; color: #fff !important; }
+    .menu-toggle { display: none; border: 1px solid rgba(255,255,255,.2); background: transparent; color: white; width: 42px; height: 42px; border-radius: 12px; cursor: pointer; }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; color: white; background: radial-gradient(circle at 82% 20%, rgba(37,99,235,.23), transparent 30%), radial-gradient(circle at 14% 85%, rgba(56,189,248,.13), transparent 28%), var(--navy); }
+    .hero::before { content: ""; position: absolute; inset: 0; opacity: .18; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 52px 52px; mask-image: linear-gradient(to bottom, black, transparent 95%); }
+    .hero-inner { position: relative; display: grid; grid-template-columns: 1.16fr .84fr; gap: 60px; align-items: center; padding: 86px 0 80px; min-height: 610px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 13px; border: 1px solid rgba(142,230,207,.26); background: rgba(142,230,207,.08); border-radius: 999px; color: #b9f5e4; font-size: .75rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 4px rgba(142,230,207,.12); }
+    h1 { margin-top: 24px; max-width: 760px; font-size: clamp(3.15rem, 6.3vw, 5.7rem); line-height: .99; letter-spacing: -.075em; }
+    h1 .accent { color: var(--cyan); }
+    .hero-role { margin-top: 22px; color: #dbe8f7; font-size: clamp(1.05rem, 2vw, 1.32rem); font-weight: 650; }
+    .hero-copy { max-width: 680px; margin-top: 18px; color: #aab8cb; font-size: 1.06rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 19px; border-radius: 12px; border: 1px solid transparent; font-size: .92rem; font-weight: 750; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--cyan); color: #061322; }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-ghost { color: white; border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.035); }
+    .btn-ghost:hover { border-color: rgba(56,189,248,.7); background: rgba(56,189,248,.08); }
+    .hero-note { margin-top: 21px; color: #8494ab; font-size: .82rem; }
+
+    .hero-panel { position: relative; padding: 18px; border: 1px solid rgba(255,255,255,.13); background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.035)); border-radius: 26px; box-shadow: 0 30px 90px rgba(0,0,0,.23); }
+    .panel-top { display: flex; align-items: center; justify-content: space-between; padding: 5px 5px 17px; border-bottom: 1px solid rgba(255,255,255,.11); }
+    .window-dots { display: flex; gap: 6px; }
+    .window-dots i { width: 7px; height: 7px; border-radius: 50%; background: #65758b; }
+    .panel-label { color: #9eafc5; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+    .panel-body { padding: 24px 8px 8px; }
+    .panel-heading { color: #f8fbff; font-size: 1.05rem; font-weight: 760; }
+    .panel-sub { color: #93a5bc; margin-top: 4px; font-size: .82rem; }
+    .flow { display: grid; gap: 10px; margin-top: 24px; }
+    .flow-item { display: grid; grid-template-columns: 38px 1fr auto; gap: 12px; align-items: center; padding: 13px; border: 1px solid rgba(255,255,255,.09); border-radius: 14px; background: rgba(5,12,24,.36); }
+    .flow-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; color: var(--cyan); background: rgba(56,189,248,.12); font-weight: 850; font-size: .82rem; }
+    .flow-main strong { display: block; font-size: .85rem; color: #eef5ff; }
+    .flow-main span { display: block; color: #91a3b9; font-size: .73rem; margin-top: 1px; }
+    .flow-tag { color: #b8f3e2; font-size: .69rem; font-weight: 750; white-space: nowrap; }
+    .panel-foot { display: flex; flex-wrap: wrap; gap: 7px; padding: 17px 3px 2px; }
+    .panel-chip { border-radius: 7px; padding: 5px 8px; color: #b8c8db; background: rgba(255,255,255,.06); font-size: .7rem; font-weight: 650; }
+
+    /* Credibility strip */
+    .proof-strip { margin-top: -1px; background: #fff; border-bottom: 1px solid var(--line); }
+    .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .proof-item { padding: 24px 18px; border-right: 1px solid var(--line); }
+    .proof-item:first-child { padding-left: 0; }
+    .proof-item:last-child { border-right: 0; }
+    .proof-item strong { display: block; font-size: 1.2rem; line-height: 1.4; letter-spacing: -.03em; }
+    .proof-item span { color: var(--muted); font-size: .78rem; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 66px; align-items: start; }
+    .about-copy { color: var(--ink-soft); font-size: 1.04rem; }
+    .about-copy p + p { margin-top: 16px; }
+    .about-points { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 28px; }
+    .about-point { padding: 14px 15px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+    .about-point strong { display: block; font-size: .88rem; }
+    .about-point span { color: var(--muted); font-size: .78rem; }
+
+    /* Services */
+    .services-section { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .service-card { padding: 25px; min-height: 230px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(145deg, #fff, #fbfdff); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .service-card:hover { transform: translateY(-4px); border-color: #b7d6ff; box-shadow: var(--shadow); }
+    .service-icon { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 13px; color: var(--blue); background: var(--blue-soft); font-weight: 850; font-size: .9rem; }
+    .service-card h3 { margin-top: 18px; font-size: 1.05rem; letter-spacing: -.02em; }
+    .service-card p { margin-top: 9px; color: var(--muted); font-size: .89rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .mini-tag { background: #f0f5fb; color: #496078; padding: 4px 8px; border-radius: 6px; font-size: .7rem; font-weight: 700; }
+
+    /* Work */
+    .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 19px; }
+    .work-card { position: relative; overflow: hidden; padding: 28px; border-radius: 20px; border: 1px solid var(--line); background: white; box-shadow: 0 7px 22px rgba(16,24,39,.025); }
+    .work-card::after { content: ""; position: absolute; top: -35px; right: -35px; width: 110px; height: 110px; border-radius: 50%; background: var(--blue-soft); opacity: .7; }
+    .work-card > * { position: relative; z-index: 1; }
+    .work-top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .work-type { color: var(--blue); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 850; }
+    .status { border: 1px solid #d7e8ff; border-radius: 999px; padding: 3px 8px; color: #315ba0; background: #f3f8ff; font-size: .68rem; font-weight: 750; }
+    .work-card h3 { max-width: 460px; font-size: 1.24rem; line-height: 1.3; letter-spacing: -.025em; }
+    .work-card p { color: var(--muted); font-size: .91rem; margin-top: 12px; }
+    .work-card ul { padding-left: 18px; margin-top: 13px; color: #475569; font-size: .86rem; }
+    .work-card li { margin: 5px 0; }
+    .work-note { margin-top: 22px; color: #7c899b; font-size: .8rem; }
+
+    /* Experience */
+    .experience-section { background: var(--navy); color: white; }
+    .experience-section .section-intro { color: #9fadc1; }
+    .experience-section .eyebrow { color: var(--cyan); }
+    .timeline { position: relative; max-width: 900px; margin-left: 6px; border-left: 1px solid rgba(255,255,255,.18); padding-left: 32px; }
+    .timeline-item { position: relative; padding: 0 0 34px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before { content: ""; position: absolute; left: -39px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 5px rgba(56,189,248,.1); }
+    .timeline-date { color: #8ca4c0; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; }
+    .timeline-item h3 { margin-top: 5px; color: #f4f8ff; font-size: 1.14rem; }
+    .timeline-company { margin-top: 2px; color: var(--cyan); font-size: .88rem; font-weight: 700; }
+    .timeline-item ul { margin-top: 9px; padding-left: 18px; color: #b6c3d4; font-size: .88rem; }
+    .timeline-item li { margin: 4px 0; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .skill-group { background: #fff; border: 1px solid var(--line); padding: 22px; border-radius: 17px; }
+    .skill-group h3 { font-size: .94rem; margin-bottom: 14px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip { display: inline-flex; align-items: center; border-radius: 7px; padding: 6px 9px; background: #f3f6fb; color: #4a5a70; font-size: .72rem; font-weight: 650; }
+    .skill-footnote { margin-top: 20px; color: #8190a4; font-size: .81rem; }
+
+    /* Engagement */
+    .engagement { padding: 34px; display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; border: 1px solid #d9e6f7; border-radius: 22px; background: linear-gradient(125deg, #eef6ff, #f7fbff); }
+    .engagement h3 { font-size: 1.5rem; letter-spacing: -.035em; }
+    .engagement p { margin-top: 8px; max-width: 700px; color: #52647a; font-size: .92rem; }
+    .engagement .btn { white-space: nowrap; }
+
+    /* Contact */
+    .contact-section { background: #080e19; color: white; }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 50px; align-items: start; }
+    .contact-section .eyebrow { color: var(--cyan); }
+    .contact-section .section-title { max-width: 540px; }
+    .contact-copy { color: #9eacc0; margin-top: 18px; max-width: 500px; }
+    .contact-info { display: grid; gap: 12px; margin-top: 24px; }
+    .contact-info a { color: #e8f1fe; font-size: .92rem; }
+    .contact-info a:hover { color: var(--cyan); }
+    .contact-card { padding: 27px; border: 1px solid rgba(255,255,255,.13); background: rgba(255,255,255,.04); border-radius: 19px; }
+    .contact-card h3 { font-size: 1.08rem; }
+    .contact-card p { color: #9eacc0; margin-top: 8px; font-size: .88rem; }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 22px; }
+    .contact-actions .btn-ghost { border-color: rgba(255,255,255,.17); }
+    .footer { padding: 23px 0; color: #8090a6; background: #080e19; border-top: 1px solid rgba(255,255,255,.08); font-size: .77rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer a { color: #b8c6d8; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+    @media (max-width: 940px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 42px; padding-top: 74px; }
+      .hero-copy { max-width: 740px; }
+      .hero-panel { max-width: 620px; }
+      .services-grid { grid-template-columns: repeat(2,1fr); }
+      .skills-grid { grid-template-columns: repeat(2,1fr); }
+      .about-grid { gap: 36px; }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(var(--max), calc(100% - 34px)); }
+      .section { padding: 70px 0; }
+      .nav-inner { min-height: 68px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 24px 22px; background: #0b1220; border-bottom: 1px solid rgba(255,255,255,.1); flex-direction: column; align-items: stretch; gap: 0; }
+      .nav-links.open { display: flex; }
+      .nav-links li a { display: block; padding: 12px 0; }
+      .nav-cta { text-align: center; margin-top: 8px; }
+      .hero-inner { min-height: auto; padding: 66px 0 62px; }
+      h1 { font-size: clamp(3rem, 13vw, 4.7rem); }
+      .hero-copy { font-size: .98rem; }
+      .hero-actions .btn { flex: 1 1 auto; }
+      .proof-grid { grid-template-columns: repeat(2,1fr); }
+      .proof-item { padding: 17px 10px; border-bottom: 1px solid var(--line); }
+      .proof-item:first-child { padding-left: 10px; }
+      .proof-item:nth-child(2) { border-right: 0; }
+      .proof-item:nth-child(3), .proof-item:nth-child(4) { border-bottom: 0; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+      .about-points { grid-template-columns: 1fr 1fr; }
+      .services-grid, .work-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .engagement { grid-template-columns: 1fr; padding: 24px; }
+      .engagement .btn { width: 100%; }
+      .contact-grid { gap: 32px; }
+    }
+    @media (max-width: 430px) {
+      .brand-name { font-size: .94rem; }
+      .brand-name small { font-size: .61rem; }
+      .hero-eyebrow { font-size: .65rem; }
+      .about-points, .skills-grid { grid-template-columns: 1fr; }
+      .flow-item { grid-template-columns: 34px 1fr; }
+      .flow-icon { width: 34px; height: 34px; }
+      .flow-tag { grid-column: 2; justify-self: start; }
+      .panel-label { font-size: .61rem; }
+      .work-card { padding: 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="Kalyan Jadhav home">
+        <span class="brand-mark">KJ</span>
+        <span class="brand-name">Kalyan Jadhav<small>Business Central Technical Consultant</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Selected Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a class="nav-cta" href="#contact">Let’s connect ↗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="container hero-inner">
+      <div class="hero-text reveal">
+        <div class="hero-eyebrow"><span class="status-dot"></span> Microsoft Dynamics 365 · NAV & Business Central</div>
+        <h1>ERP development with <span class="accent">purpose.</span></h1>
+        <div class="hero-role">Kalyan Jadhav · Business Central Technical Consultant & AL Developer</div>
+        <p class="hero-copy">I build and support practical ERP solutions through AL development, custom reports, migration assistance, data validation, and integrations. My focus is simple: understand the business requirement, deliver maintainable changes, and help teams work with confidence.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:kalyanjadhav500@gmail.com?subject=Business%20Central%20Project%20Enquiry">Discuss a project <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-ghost" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="hero-note">4+ years of experience · Open to well-scoped freelance and contract opportunities</p>
+      </div>
+
+      <div class="hero-panel reveal" aria-label="Technical capabilities overview">
+        <div class="panel-top">
+          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="panel-label">ERP engineering toolkit</span>
+        </div>
+        <div class="panel-body">
+          <div class="panel-heading">From business requirement to tested solution</div>
+          <p class="panel-sub">A practical workflow for Business Central technical work.</p>
+          <div class="flow">
+            <div class="flow-item">
+              <span class="flow-icon">01</span>
+              <span class="flow-main"><strong>Understand the requirement</strong><span>Scope, business rules and expected result</span></span>
+              <span class="flow-tag">Analyse</span>
+            </div>
+            <div class="flow-item">
+              <span class="flow-icon">02</span>
+              <span class="flow-main"><strong>Build or troubleshoot</strong><span>AL extensions, reports and data flows</span></span>
+              <span class="flow-tag">Develop</span>
+            </div>
+            <div class="flow-item">
+              <span class="flow-icon">03</span>
+              <span class="flow-main"><strong>Validate the outcome</strong><span>Test cases, data checks and handover notes</span></span>
+              <span class="flow-tag">Verify</span>
+            </div>
+          </div>
+          <div class="panel-foot">
+            <span class="panel-chip">AL / VS Code</span>
+            <span class="panel-chip">RDLC</span>
+            <span class="panel-chip">NAV → BC</span>
+            <span class="panel-chip">APIs & JSON</span>
+            <span class="panel-chip">Power Platform</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="proof-strip" aria-label="Core areas">
+    <div class="container proof-grid">
+      <div class="proof-item"><strong>4+ years</strong><span>Business Central / NAV experience</span></div>
+      <div class="proof-item"><strong>AL & Extensions</strong><span>Custom ERP development</span></div>
+      <div class="proof-item"><strong>NAV → BC</strong><span>Migration and data validation</span></div>
+      <div class="proof-item"><strong>Reports & APIs</strong><span>Integration and business outputs</span></div>
+    </div>
+  </div>
+
+  <main>
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="reveal">
+          <div class="eyebrow">About me</div>
+          <h2 class="section-title">Technical solutions grounded in real business needs.</h2>
+        </div>
+        <div class="about-copy reveal">
+          <p>I am a Microsoft Dynamics 365 Business Central / NAV Technical Consultant with over 4 years of experience in ERP development, customization, reporting, migration support, and technical troubleshooting. I enjoy solving practical business problems by building dependable, user-friendly solutions that fit the way teams work.</p>
+          <p>My experience includes AL development, custom modules and extensions, RDLC and document reports, data mapping and validation, opening-balance migration support, and NAV-to-Business Central Cloud migration activities. I also work with APIs and web services, Git/Azure DevOps, Power BI, and Power Automate, while exploring practical AI-assisted workflows for ERP support.</p>
+          <p>I value clear communication, sensible scope, maintainable code, and testing before handover. I can contribute to an implementation partner’s technical backlog or help a Business Central team with a focused development or support task.</p>
+          <div class="about-points">
+            <div class="about-point"><strong>Practical development</strong><span>Extensions, reports and modules</span></div>
+            <div class="about-point"><strong>Data confidence</strong><span>Mapping, migration and validation</span></div>
+            <div class="about-point"><strong>Connected systems</strong><span>APIs, web services and JSON</span></div>
+            <div class="about-point"><strong>Continuous learning</strong><span>Power Platform and AI workflows</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services-section" id="services">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">What I can help with</div>
+          <h2 class="section-title">Focused technical support for your ERP work.</h2>
+          <p class="section-intro">I work best with clearly defined requirements, short development tasks, troubleshooting assignments, and ongoing support needs.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="service-icon">AL</div>
+            <h3>AL Development & Extensions</h3>
+            <p>Custom tables, pages, codeunits, page/table extensions, business logic, and targeted enhancements for Business Central.</p>
+            <div class="service-tags"><span class="mini-tag">AL</span><span class="mini-tag">VS Code</span><span class="mini-tag">Extensions</span></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-icon">RPT</div>
+            <h3>Reports & Documents</h3>
+            <p>RDLC, document and Excel Buffer report changes for finance and operations, with attention to layout and output accuracy.</p>
+            <div class="service-tags"><span class="mini-tag">RDLC</span><span class="mini-tag">Word Layout</span><span class="mini-tag">Excel Buffer</span></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-icon">↔</div>
+            <h3>Migration & Data Validation</h3>
+            <p>Support for NAV-to-BC data movement, field mapping, staging and validation, opening balances, and migration issue analysis.</p>
+            <div class="service-tags"><span class="mini-tag">NAV → BC</span><span class="mini-tag">Mapping</span><span class="mini-tag">Validation</span></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-icon">API</div>
+            <h3>API & Web Service Support</h3>
+            <p>Help with data exchange, payload checks, web service troubleshooting, and integration-related development in NAV/BC contexts.</p>
+            <div class="service-tags"><span class="mini-tag">REST / OData</span><span class="mini-tag">JSON</span><span class="mini-tag">Postman</span></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-icon">FIX</div>
+            <h3>Bug Fixes & Technical Support</h3>
+            <p>Reproduce reported issues, inspect AL logic, make scoped corrections, test the result, and document important changes.</p>
+            <div class="service-tags"><span class="mini-tag">Troubleshooting</span><span class="mini-tag">Testing</span><span class="mini-tag">Documentation</span></div>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-icon">AI</div>
+            <h3>Reporting & Workflow Automation</h3>
+            <p>Support for Power BI and Power Automate use cases, with early exploration of AI-assisted error analysis and ERP productivity.</p>
+            <div class="service-tags"><span class="mini-tag">Power BI</span><span class="mini-tag">Power Automate</span><span class="mini-tag">AI exploration</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Selected work</div>
+          <h2 class="section-title">A sample of the ERP problems I work on.</h2>
+          <p class="section-intro">These summaries highlight solution areas and responsibilities without exposing client data, source code, or confidential implementation details.</p>
+        </div>
+        <div class="work-grid">
+          <article class="work-card reveal">
+            <div class="work-top"><span class="work-type">Migration</span><span class="status">Completed components</span></div>
+            <h3>NAV 2016 to Business Central Cloud — Migration Framework</h3>
+            <p>Developed core technical components for an API-driven migration approach, including staged data handling and validation patterns to support the movement of legacy NAV data into Business Central Cloud.</p>
+            <ul><li>API-driven extraction and staging components</li><li>Buffer-table validation and data-filtering logic</li><li>Migration troubleshooting and opening-balance support</li></ul>
+          </article>
+          <article class="work-card reveal">
+            <div class="work-top"><span class="work-type">Customization</span><span class="status">Module development</span></div>
+            <h3>Business-specific modules and workflow enhancements</h3>
+            <p>Development and customization across multiple ERP requirements to support operational processes and reduce manual effort.</p>
+            <ul><li>Purchase requisition and indent-related functionality</li><li>Payroll, RFP/RFQ, logbook and deposit-management modules</li><li>Custom pages, codeunits, tables and extensions</li></ul>
+          </article>
+          <article class="work-card reveal">
+            <div class="work-top"><span class="work-type">Reporting</span><span class="status">Business outputs</span></div>
+            <h3>Reports for finance and operations</h3>
+            <p>Report development and layout updates that help users produce clear, consistent business documents and operational reports.</p>
+            <ul><li>RDLC and document layout modifications</li><li>Excel Buffer-based reporting</li><li>Output checking and report troubleshooting</li></ul>
+          </article>
+          <article class="work-card reveal">
+            <div class="work-top"><span class="work-type">Integration</span><span class="status">Workflow support</span></div>
+            <h3>Vendor portal and data-exchange workflows</h3>
+            <p>Experience includes vendor-related portal functionality, email approval workflows, and technical work around data exchange and reporting.</p>
+            <ul><li>Workflow-focused custom functionality</li><li>NAV/BC web services and API-related tasks</li><li>Technical support, testing and refinements</li></ul>
+          </article>
+        </div>
+        <p class="work-note">Project descriptions are intentionally high-level. Client names, environments, code and data are not disclosed.</p>
+      </div>
+    </section>
+
+    <section class="section experience-section" id="experience">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Career journey</div>
+          <h2 class="section-title">Experience across NAV and Business Central.</h2>
+          <p class="section-intro">Technical development, customization and support across ERP project environments.</p>
+        </div>
+        <div class="timeline reveal">
+          <article class="timeline-item">
+            <div class="timeline-date">Jul 2025 — Present</div>
+            <h3>D365 Business Central Technical Consultant</h3>
+            <div class="timeline-company">THINQ Pharma-CRO Limited · Mumbai, India</div>
+            <ul><li>Contribute to NAV 2016 to Business Central Cloud migration activities, data mapping, validation and technical troubleshooting.</li><li>Work on AL customization, migration utilities, reporting, and related technical requirements.</li></ul>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">Feb 2025 — Jun 2025</div>
+            <h3>Freelance Business Central Consultant</h3>
+            <div class="timeline-company">MARS Cosmetics · Remote</div>
+            <ul><li>Provided remote Business Central customization and technical support.</li><li>Worked on scoped AL changes, reports, debugging and process enhancements.</li></ul>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">Jan 2024 — Dec 2024</div>
+            <h3>Technical Consultant</h3>
+            <div class="timeline-company">Digital Flakes Solutions Pvt. Ltd. · Pune, India</div>
+            <ul><li>Worked on Business Central / NAV development, customization, implementation support and issue resolution.</li><li>Developed custom modules and reports for business requirements.</li></ul>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">Jul 2023 — Dec 2023</div>
+            <h3>Technical Consultant</h3>
+            <div class="timeline-company">Dev Information Technology · Ahmedabad, India</div>
+            <ul><li>Supported Business Central / NAV development, validation, issue resolution and migration-related tasks.</li><li>Worked on custom business modules including RFP/RFQ and deposit-management functionality.</li></ul>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">Feb 2022 — May 2023</div>
+            <h3>Technical Consultant</h3>
+            <div class="timeline-company">Leaping Frog Solutions · Navi Mumbai, India</div>
+            <ul><li>Contributed to NAV and Business Central customizations, testing, stabilization and client support.</li><li>Worked on vendor-portal functionality and email approval workflow requirements.</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Technical toolkit</div>
+          <h2 class="section-title">Skills built around ERP delivery.</h2>
+          <p class="section-intro">Tools and technologies I use across development, reporting, data movement and delivery workflows.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-group reveal"><h3>Business Central / NAV</h3><div class="chips"><span class="chip">Dynamics 365 BC</span><span class="chip">Dynamics NAV</span><span class="chip">AL</span><span class="chip">C/AL concepts</span><span class="chip">Extensions</span><span class="chip">Tables / Pages / Codeunits</span></div></div>
+          <div class="skill-group reveal"><h3>Reporting & Data</h3><div class="chips"><span class="chip">RDLC</span><span class="chip">Document layouts</span><span class="chip">Excel Buffer</span><span class="chip">Data migration</span><span class="chip">Configuration packages</span><span class="chip">Validation</span></div></div>
+          <div class="skill-group reveal"><h3>Integration & Delivery</h3><div class="chips"><span class="chip">APIs / Web services</span><span class="chip">OData</span><span class="chip">JSON</span><span class="chip">Postman</span><span class="chip">Git</span><span class="chip">Azure DevOps</span></div></div>
+          <div class="skill-group reveal"><h3>Analytics & Automation</h3><div class="chips"><span class="chip">Power BI</span><span class="chip">Power Automate</span><span class="chip">Copilot / AI exploration</span><span class="chip">Prompt engineering</span><span class="chip">Workflow support</span></div></div>
+        </div>
+        <p class="skill-footnote">I continue to deepen my integration and AI automation skills through hands-on practice and practical ERP use cases.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Freelance engagement">
+      <div class="container">
+        <div class="engagement reveal">
+          <div><h3>Need an extra technical hand on a Business Central project?</h3><p>I’m interested in well-defined freelance tasks, remote contract work, report changes, AL enhancements, migration validation, and technical support engagements.</p></div>
+          <a class="btn btn-primary" href="mailto:kalyanjadhav500@gmail.com?subject=Business%20Central%20Freelance%20Enquiry">Discuss your requirement ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <div class="eyebrow">Get in touch</div>
+          <h2 class="section-title">Let’s solve a useful ERP problem.</h2>
+          <p class="contact-copy">For Business Central development, migration support, report customization, integration troubleshooting, or contract opportunities, please share the requirement and expected outcome.</p>
+          <div class="contact-info"><a href="mailto:kalyanjadhav500@gmail.com">✉ &nbsp; kalyanjadhav500@gmail.com</a><a href="tel:+918080057362">☎ &nbsp; +91 80800 57362</a><a href="https://www.linkedin.com/in/kalyan-j-41b7a1229" target="_blank" rel="noopener noreferrer">↗ &nbsp; LinkedIn profile</a></div>
+        </div>
+        <div class="contact-card reveal">
+          <h3>Project enquiry</h3>
+          <p>To help me respond usefully, include the Business Central / NAV version, the issue or requirement, any error details, and the expected timeline.</p>
+          <div class="contact-actions"><a class="btn btn-primary" href="mailto:kalyanjadhav500@gmail.com?subject=Business%20Central%20Project%20Enquiry&body=Hello%20Kalyan%2C%0A%0AWe%20need%20support%20with%3A%0A%0ABusiness%20Central%2FNAV%20version%3A%0ARequirement%3A%0AExpected%20timeline%3A%0A%0ARegards%2C">Email project details ↗</a><a class="btn btn-ghost" href="https://www.linkedin.com/in/kalyan-j-41b7a1229" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 Kalyan Jadhav · Microsoft Dynamics 365 Business Central Technical Consultant</span><span>Built around practical ERP problem-solving · <a href="#home">Back to top ↑</a></span></div></footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      menuButton.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation menu');
+        menuButton.textContent = '☰';
+      });
+    });
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+  </script>
+</body>
+</html>
